@@ -30,7 +30,7 @@ import subprocess
 
 from boto3 import Session
 
-__version__ = '0.18.0' # Update here and pyproject.toml
+__version__ = '0.19.0' # Update here and pyproject.toml
 
 LOGGER = logging.getLogger('aws-export-credentials')
 
@@ -47,7 +47,7 @@ TIME_FORMAT = '%Y-%m-%dT%H:%M:%SZ'
 
 Credentials = namedtuple('Credentials', ['AccessKeyId', 'SecretAccessKey', 'SessionToken', 'Expiration'])
 def convert_creds(read_only_creds, expiration=None):
-    return Credentials(*list(read_only_creds) + [expiration])
+    return Credentials(read_only_creds.access_key, read_only_creds.secret_key, read_only_creds.token, expiration)
 
 def parse_container_arg(value):
     token = value[1]
